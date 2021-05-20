@@ -99,11 +99,8 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Rate)
-        </th>
-        <th>
-            @Html.Label("Actions")
-        </th>
-        <th></th>
+        </th>       
+        
     </tr>
 
     @foreach (var item in Model)
@@ -132,12 +129,7 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Rate)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" }) |
-
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
-                </td>
+                </td>               
             }
         </tr>
     }

@@ -349,6 +349,8 @@
     <Content Include="Areas\Admin\Views\AdminReceivedProposal\Approve.cshtml" />
     <Content Include="Areas\Admin\Views\AdminPosts\Index.cshtml" />
     <Content Include="Areas\FreeLancer\Views\AcceptedProposal\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminReceivedProposal\Reject.cshtml" />
+    <Content Include="Areas\Client\Views\ReceivdProposals\Reject.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

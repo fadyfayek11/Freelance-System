@@ -1,0 +1,32 @@
+﻿@model WebApplication1.Models.ProposalModels
+
+@{
+    ViewBag.Title = "Reject";
+}
+
+<h2>Reject</h2>
+
+<h3>Are you sure you want to Reject this?</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TheProposal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheProposal)
+        </dd>  
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Reject" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

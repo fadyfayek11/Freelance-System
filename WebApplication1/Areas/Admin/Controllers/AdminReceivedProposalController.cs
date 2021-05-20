@@ -97,42 +97,35 @@ namespace WebApplication1.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/AdminReceivedProposal/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Reject(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            var proposal = await _db.Proposals.FirstOrDefaultAsync(p=>p.IdOfProposal == id);
+            if (proposal == null)
+            {
+                return HttpNotFound();
+            }
+            return View(proposal);
         }
 
-        // POST: Admin/AdminReceivedProposal/Edit/5
+        // POST: Admin/ReceivdProposals/Reject/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Reject(int id)
         {
             try
             {
-                // TODO: Add update logic here
+                var proposal = await _db.Proposals.FirstOrDefaultAsync(p => p.IdOfProposal == id);
+                if (proposal == null)
+                {
+                    return HttpNotFound();
+                }
+                _db.Proposals.Remove(proposal);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Admin/AdminReceivedProposal/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Admin/AdminReceivedProposal/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             catch

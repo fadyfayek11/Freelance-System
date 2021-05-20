@@ -98,19 +98,27 @@ namespace WebApplication1.Areas.Client.Controllers
         }
 
         // GET: Client/ReceivdProposals/Reject/5
-        public ActionResult Reject(int id)
+        public async Task<ActionResult> Reject(int id)
         {
-            return View();
+            var proposal = await _db.Proposals.FirstOrDefaultAsync(p => p.IdOfProposal == id);
+            return View(proposal);
         }
 
         // POST: Client/ReceivdProposals/Reject/5
         [HttpPost]
-        public ActionResult Reject(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Reject(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                var proposal = await _db.Proposals.FirstOrDefaultAsync(p => p.IdOfProposal == id);
+                if (proposal == null)
+                {
+                    return HttpNotFound();
+                }
+                _db.Proposals.Remove(proposal);
 
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             catch

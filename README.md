@@ -26,7 +26,7 @@ Freelance web applications are platforms, where both people looking for work and
                 <li>Admin Accept or Refuse Posts written by the Clients before adding it to the Wall.</li>
                 <li>The admin must login first, to operate his job</li>
             </ol>
-        <ul>    
+        </ul>    
     <li>Clients</li>
         <ul>
             <li>Write job posts that will show in the wall page</li>
@@ -56,5 +56,5 @@ Freelance web applications are platforms, where both people looking for work and
                 <li>Freelancer can save a particular post in saved page (to read later)</li>
                 <li>User can apply to a job by sending a proposal to the client</li>
             </ol>
-        <ul>    
+        </ul>    
 </ol>

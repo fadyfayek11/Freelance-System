@@ -1,8 +1,8 @@
 # Freelance-System
 <h1>Using Asp .net Mvc FrameWork & Entity FrameWork</h1>
-<h2>Problem Definition:<h2>
-<p>If you’re looking for a flexible schedule in which you can make your own hours, work from home during this pandemic, then a freelance job might be for you. A lot of work can be done remotely these days, so your dreams of working from your couch can come true by developing a freelance web application to manage all of these.
-Freelance web applications are platforms, where both people looking for work and employers post their offers.</p>
+<h4>Problem Definition:<h4>
+<h5>If you’re looking for a flexible schedule in which you can make your own hours, work from home during this pandemic, then a freelance job might be for you. A lot of work can be done remotely these days, so your dreams of working from your couch can come true by developing a freelance web application to manage all of these.
+Freelance web applications are platforms, where both people looking for work and employers post their offers.</h5>
 <hr>
 <h2>Actors (Three actors):</h2>
 <ul>

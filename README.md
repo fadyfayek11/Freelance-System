@@ -57,4 +57,4 @@ Freelance web applications are platforms, where both people looking for work and
                 <li>User can apply to a job by sending a proposal to the client</li>
             </ol>
         <ul>    
-<ol>
+</ol>

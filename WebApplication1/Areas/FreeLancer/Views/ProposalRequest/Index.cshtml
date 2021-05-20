@@ -1,0 +1,59 @@
+﻿@model WebApplication1.ViewModels.PostAndProposelViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>My Proposal</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <table class="table">
+                <tr>
+                    <th>Job Type</th>
+                    <th>Job Budget</th>
+                    <th>Rate</th>
+                    <th>Number Of Submitted</th>
+                    <th>Owner</th>
+                </tr>
+
+                @foreach (var post in Model.PostJob)
+                {
+                    <tr>
+
+                        <td>@post.JobType</td>
+                        <td>@post.JobBudget $</td>
+                        <td>@post.Rate</td>
+                        <td>@post.NumberOfSubmitted</td>
+                        <td>@post.UserName</td>                        
+                    </tr>
+                }               
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <table class="table">
+                <tr>
+                    <th>The Proposal</th>
+                    
+                    <th>Actions</th>
+                </tr>
+
+                @foreach (var proposal in Model.Proposals)
+                {
+                    <tr>
+
+                        <td>@proposal.TheProposal</td>                     
+
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new {  id= proposal.IdOfProposal}) |
+                          
+                            @Html.ActionLink("Delete", "Delete", new { id = proposal.IdOfProposal })
+                        </td>
+                    </tr>
+                }           
+
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+﻿@model WebApplication1.Models.PostJob
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Add</h2>
+
+@using (Html.BeginForm("Add", "MySavedPost"))
+{
+    @Html.AntiForgeryToken()
+<div>
+    <h4>Job Post</h4>
+    <hr />
+    <span style="color:red">@ViewBag.ExistSavedPost</span>
+    <dl class="dl-horizontal">
+        @Html.HiddenFor(model => model.Id)
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobBudget)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobBudget)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discription)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfSubmitted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfSubmitted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rate)
+        </dd>
+
+
+    </dl>
+</div>
+    <p>
+        <input type="submit" value="Save" class="btn btn-danger form-control" />
+        @Html.ActionLink("Back to List", "Index", "Posts", new { area = "" })
+    </p>
+
+}

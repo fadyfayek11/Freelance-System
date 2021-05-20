@@ -1,0 +1,88 @@
+﻿@model WebApplication1.Models.PostJob
+@using WebApplication1.Utility
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Job Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobBudget)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobBudget) $
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfSubmitted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfSubmitted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rate)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    @if (User.IsInRole(SD.FreelancerUser))
+    {
+        @Html.ActionLink("Make A Proposal", "Create", "ProposalRequest", new { area = "FreeLancer", id = Model.Id }, new { @class = "btn btn-success" })
+        @Html.ActionLink("Save To Read Later", "Add", "MySavedPost", new { area = "FreeLancer", id = Model.Id }, new { @class = "btn btn-success" ,@style = "margin:0px 5px"})
+    }
+    else if (User.IsInRole(SD.ClientUser))
+    {
+        @Html.ActionLink("Edit", "Edit", "ClientPosts", new { id = Model.Id, area = "Client" }, new { @class = "btn btn-success" })
+    }
+    else
+    {
+        @Html.ActionLink("Make A Proposal", "Create", "ProposalRequest", new { area = "FreeLancer", id = Model.Id }, new { @class = "btn btn-success" })
+    }|
+    @Html.ActionLink("Back to List", "Index")
+
+</div>

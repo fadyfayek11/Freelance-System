@@ -1,0 +1,68 @@
+﻿@model WebApplication1.ViewModels.ProposalAndUserInfoViewModel
+
+@{
+    ViewBag.Title = "Approve";
+}
+
+<h2>Approve</h2>
+
+<div>
+    <h4>Proposal And FreeLancer Info </h4>
+    <hr />
+    <dl class="dl-horizontal">
+    </dl>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <table class="table">
+                <tr>
+                    <th>The Proposal</th>
+                </tr>
+
+                @foreach (var proposal in Model.ProposalData)
+                {
+                    <tr>
+
+                        <td>@proposal.TheProposal</td>
+
+                    </tr>
+
+                }
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <table class="table">
+                <tr>
+                    <th>FreeLancer Name</th>
+                    <th>FreeLancer Phone</th>
+                    <th>FreeLancer Photo</th>
+                </tr>
+
+                @foreach (var userData in Model.UserData)
+                {
+                    <tr>
+
+                        <td>@userData.UserName</td>
+                        <td>@userData.PhoneNumber</td>
+                        <td>
+                            @{
+                                string path = userData.Photo == null ? "profile.png" : userData.Photo;
+
+                            }
+                            <img src="~/ProfilesImages/@path" alt="Profile" width="50" height="50" style="border-radius:50%" />
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Approve", "ReceivdProposals", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Approve" class="btn btn-success" />
+        @Html.ActionLink("Back to List", "Index")
+    }
+</div>

@@ -35,8 +35,18 @@ namespace WebApplication1.Controllers
                 }
                 else if (option == "Date")
                 {
-                    DateTime SearchDate = Convert.ToDateTime(search);
-                    return View(_db.PostJobs.Where(p => p.CreationDate == SearchDate && p.IsAvilavbleAtWall == true || search == null).ToList());
+                    try
+                    {
+                        DateTime SearchDate = Convert.ToDateTime(search);
+                        return View(_db.PostJobs.Where(p => p.CreationDate == SearchDate && p.IsAvilavbleAtWall == true || search == null).ToList());
+
+                    }
+                    catch (Exception)
+                    {
+
+                        
+                    }
+                    return View(_db.PostJobs.Where(p => p.IsAvilavbleAtWall == true));
                 }
                 else 
                 {

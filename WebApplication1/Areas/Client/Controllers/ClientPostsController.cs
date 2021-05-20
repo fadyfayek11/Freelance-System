@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using WebApplication1.Utility;
 
 namespace WebApplication1.Areas.Client.Controllers
 {
+    [Authorize(Roles = SD.ClientUser)]
     public class ClientPostsController : Controller
     {
         private readonly ApplicationDbContext _db;

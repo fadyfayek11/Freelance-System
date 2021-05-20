@@ -176,6 +176,7 @@
     <Compile Include="Areas\Client\Controllers\ClientPostsController.cs" />
     <Compile Include="Areas\Client\Controllers\PostFromClientController.cs" />
     <Compile Include="Areas\Client\Controllers\ReceivdProposalsController.cs" />
+    <Compile Include="Areas\FreeLancer\Controllers\AcceptedProposalController.cs" />
     <Compile Include="Areas\FreeLancer\Controllers\ProposalRequestController.cs" />
     <Compile Include="Areas\FreeLancer\FreeLancerAreaRegistration.cs" />
     <Compile Include="Areas\FreeLancer\Controllers\MySavedPostController.cs" />
@@ -347,6 +348,7 @@
     <Content Include="Areas\Admin\Views\AdminReceivedProposal\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AdminReceivedProposal\Approve.cshtml" />
     <Content Include="Areas\Admin\Views\AdminPosts\Index.cshtml" />
+    <Content Include="Areas\FreeLancer\Views\AcceptedProposal\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

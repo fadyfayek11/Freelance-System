@@ -5,13 +5,10 @@
 }
 <br />
 <br />
-<h2>Pending Posts</h2>
-
+<h2>My Posts</h2>
+<br />
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.JobType)
         </th>
@@ -30,6 +27,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Rate)
+        </th>
+        <th>
+            @Html.DisplayName("Status")
         </th>
         <th>
             @Html.Label("Actions")
@@ -41,10 +41,6 @@
         <tr>
             @if (item.IsStillAvilavble == false)
             {
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.JobType)
                 </td>
@@ -62,6 +58,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Rate)
+                </td>
+                <td>
+                    @Html.DisplayName("Pending")
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" }) |
@@ -69,51 +68,8 @@
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
                 </td>
             }
-        </tr>
-    }
-
-</table>
-<hr />
-<h2>My Posts At Wall</h2>
-
-<table class="table">
-    <tr>
-
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JobType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JobBudget)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Discription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumberOfSubmitted)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rate)
-        </th>
-        <th>
-            @Html.Label("Actions")
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            @if (item.IsStillAvilavble == true && item.IsAvilavbleAtWall == true)
+            else if (item.IsStillAvilavble == true && item.IsAvilavbleAtWall == true)
             {
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.JobType)
                 </td>
@@ -132,6 +88,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Rate)
+                </td>
+                <td>
+                    @Html.DisplayName("At Wall")
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" }) |
@@ -139,51 +98,8 @@
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
                 </td>
             }
-        </tr>
-    }
-
-</table>
-
-<h2>My Posts which done</h2>
-
-<table class="table">
-    <tr>
-
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JobType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JobBudget)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Discription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumberOfSubmitted)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rate)
-        </th>
-        <th>
-            @Html.Label("Actions")
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            @if (item.IsAvilavbleAtWall == false)
+            else
             {
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.JobType)
                 </td>
@@ -204,10 +120,14 @@
                     @Html.DisplayFor(modelItem => item.Rate)
                 </td>
                 <td>
+                    @Html.DisplayName("Done")
+                </td>
+                <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" }) |
 
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
                 </td>
+
             }
         </tr>
     }

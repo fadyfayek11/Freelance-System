@@ -180,6 +180,12 @@
     <Compile Include="Areas\FreeLancer\Controllers\ProposalRequestController.cs" />
     <Compile Include="Areas\FreeLancer\FreeLancerAreaRegistration.cs" />
     <Compile Include="Areas\FreeLancer\Controllers\MySavedPostController.cs" />
+    <Compile Include="BL\IPostJopRepository.cs" />
+    <Compile Include="BL\IProposalRepository.cs" />
+    <Compile Include="BL\ISavedRepository.cs" />
+    <Compile Include="BL\PostJopRepository.cs" />
+    <Compile Include="BL\ProposalRepository.cs" />
+    <Compile Include="BL\SavedRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -291,6 +297,18 @@
     <Compile Include="Migrations\202105192210044_AddUserIdToRateDb.Designer.cs">
       <DependentUpon>202105192210044_AddUserIdToRateDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105221232539_EditNotificationAtPost.cs" />
+    <Compile Include="Migrations\202105221232539_EditNotificationAtPost.Designer.cs">
+      <DependentUpon>202105221232539_EditNotificationAtPost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105221401229_EditNotificationAtPostToDb.cs" />
+    <Compile Include="Migrations\202105221401229_EditNotificationAtPostToDb.Designer.cs">
+      <DependentUpon>202105221401229_EditNotificationAtPostToDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105221419547_EditNotificationAtPostToDbProp.cs" />
+    <Compile Include="Migrations\202105221419547_EditNotificationAtPostToDbProp.Designer.cs">
+      <DependentUpon>202105221419547_EditNotificationAtPostToDbProp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -326,7 +344,6 @@
     <Content Include="Areas\Client\Views\web.config" />
     <Content Include="Areas\FreeLancer\Views\web.config" />
     <Content Include="Views\Posts\Index.cshtml" />
-    <Content Include="Views\Posts\Create.cshtml" />
     <Content Include="Areas\Client\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Client\Views\PostFromClient\Create.cshtml" />
     <Content Include="Areas\Admin\Views\PostRequest\Index.cshtml" />
@@ -351,6 +368,7 @@
     <Content Include="Areas\FreeLancer\Views\AcceptedProposal\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AdminReceivedProposal\Reject.cshtml" />
     <Content Include="Areas\Client\Views\ReceivdProposals\Reject.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminPosts\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -397,9 +415,11 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminPosts\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminPosts\Delete.cshtml" />
+    <Content Include="Views\Posts\Details.cshtml" />
     <Content Include="Views\Posts\Edit.cshtml" />
     <Content Include="Views\Posts\Delete.cshtml" />
-    <Content Include="Views\Posts\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -501,6 +521,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105192210044_AddUserIdToRateDb.resx">
       <DependentUpon>202105192210044_AddUserIdToRateDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105221232539_EditNotificationAtPost.resx">
+      <DependentUpon>202105221232539_EditNotificationAtPost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105221401229_EditNotificationAtPostToDb.resx">
+      <DependentUpon>202105221401229_EditNotificationAtPostToDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105221419547_EditNotificationAtPostToDbProp.resx">
+      <DependentUpon>202105221419547_EditNotificationAtPostToDbProp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

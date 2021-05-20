@@ -28,6 +28,8 @@ namespace WebApplication1.Models
         public virtual PostJob post { get; set; }
 
         public bool? IsAccepted { get; set; }
+        public bool? IsNotificationOfProposalRequestSeen { get; set; }
+
 
     }
 }

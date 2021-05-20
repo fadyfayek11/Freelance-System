@@ -23,7 +23,6 @@ namespace WebApplication1.Areas.Client.Controllers
         // GET: Client/ClientPosts
         public ActionResult Index()
         {
-
             var userid = User.Identity.GetUserId();           
             return View(_db.PostJobs.Where(p=>p.UserId == userid));
         }
@@ -49,27 +48,27 @@ namespace WebApplication1.Areas.Client.Controllers
         public async Task<ActionResult> Edit(PostJob model)
         {
             var post = await _db.PostJobs.FirstOrDefaultAsync(p => p.Id == model.Id);
-            model.IsStillAvilavble = true;
-            model.IsAvilavbleAtWall = true;
-            
+            DateTime date = DateTime.Now;
+
             if (post == null)
             {
                 return HttpNotFound();
             }
-
-            if (ModelState.IsValid)
+            try
             {
-                post.IsStillAvilavble = model.IsStillAvilavble;
-                post.IsAvilavbleAtWall = model.IsAvilavbleAtWall;
+
                 post.JobBudget = model.JobBudget;
                 post.JobType = model.JobType;
-              
-                post.UserName = model.UserName;
-
+                post.CreationDate = date;
 
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            catch (Exception)
+            {
+
+                
+            }           
             return View();
 
         }

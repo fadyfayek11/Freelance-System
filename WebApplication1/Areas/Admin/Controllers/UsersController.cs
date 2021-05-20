@@ -46,12 +46,8 @@ namespace WebApplication1.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            var myId = User.Identity.GetUserId();
-            ViewBag.ProposalRequest = _db.Proposals.Where(p => p.ClientId == myId && p.IsAccepted == null).Count();
-
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            ViewBag.CountRequest = _db.PostJobs.Where(p => p.IsStillAvilavble == false).Count();
             return View(_db.Users.Where(u => u.Id != claim.Value).ToList());
         }
         public ActionResult Create()

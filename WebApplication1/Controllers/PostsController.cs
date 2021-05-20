@@ -26,7 +26,6 @@ namespace WebApplication1.Controllers
             var userid = User.Identity.GetUserId();
             ViewBag.ProposalRequest = _db.Proposals.Where(p => p.ClientId == userid && p.IsAccepted == null).Count();
 
-            ViewBag.CountRequest = _db.PostJobs.Where(p => p.IsStillAvilavble == false).Count();
             if (search != null)
             {
                 if (option == "Jop Type")
@@ -58,43 +57,8 @@ namespace WebApplication1.Controllers
                 return View(_db.PostJobs.Where(p => p.IsAvilavbleAtWall == true));
             }        
 
-        }    
-       
-
-
-
-        // GET: Posts/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Posts/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(PostJob model)
-        {
-           
-            var userid = User.Identity.GetUserId();
-            try
-            {
-                model.IsStillAvilavble = true;
-                model.IsAvilavbleAtWall = true;
-                model.NumberOfSubmitted = 0;
-                model.Rate = 1;
-
-                model.UserId = userid;
-                _db.PostJobs.Add(model);
-                await _db.SaveChangesAsync();              
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }       
-       
+
         
         public async Task<ActionResult> Edit(int? id)
         {
@@ -116,27 +80,32 @@ namespace WebApplication1.Controllers
         public async Task<ActionResult> Edit(PostJob model)
         {
             var post = await _db.PostJobs.FirstOrDefaultAsync(p => p.Id == model.Id);
-            model.IsStillAvilavble = true;
-            model.IsAvilavbleAtWall = true;
-            
+
+            DateTime date = DateTime.Now;
+
             if (post == null)
             {
                 return HttpNotFound();
             }
 
-            if (ModelState.IsValid)
+            try
             {
-                post.IsStillAvilavble = model.IsStillAvilavble;
-                post.IsAvilavbleAtWall = model.IsAvilavbleAtWall;
+                post.IsStillAvilavble = true;
+                post.IsAvilavbleAtWall = true;
                 post.JobBudget = model.JobBudget;
                 post.JobType = model.JobType;
-              
-                post.UserName = model.UserName;
-
+                post.CreationDate = date;
 
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
+
             }
+            catch (Exception)
+            {
+
+
+            }
+
             return View();
 
         }
@@ -163,6 +132,7 @@ namespace WebApplication1.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var post = await _db.PostJobs.FirstOrDefaultAsync(p => p.Id == id);
+            var SavedPost = await _db.Saveds.FirstOrDefaultAsync(s => s.IdOfThePost == id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -170,12 +140,19 @@ namespace WebApplication1.Controllers
             if (ModelState.IsValid)
             {
                 _db.PostJobs.Remove(post);
+                if (SavedPost != null)
+                {
+                    _db.Saveds.Remove(SavedPost);
+                }
+               
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
             return View();
         }
+
+        
         [AllowAnonymous]
         public async Task<ActionResult> Details(int? id)
         {

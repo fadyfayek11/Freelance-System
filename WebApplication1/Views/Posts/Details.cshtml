@@ -73,16 +73,18 @@
     @if (User.IsInRole(SD.FreelancerUser))
     {
         @Html.ActionLink("Make A Proposal", "Create", "ProposalRequest", new { area = "FreeLancer", id = Model.Id }, new { @class = "btn btn-success" })
-        @Html.ActionLink("Save To Read Later", "Add", "MySavedPost", new { area = "FreeLancer", id = Model.Id }, new { @class = "btn btn-success" ,@style = "margin:0px 5px"})
+        @Html.ActionLink("Save To Read Later", "Add", "MySavedPost", new { area = "FreeLancer", id = Model.Id }, new { @class = "btn btn-success", @style = "margin:0px 5px" })
+        @Html.ActionLink("Back to List", "Index")
     }
     else if (User.IsInRole(SD.ClientUser))
     {
-        @Html.ActionLink("Edit", "Edit", "ClientPosts", new { id = Model.Id, area = "Client" }, new { @class = "btn btn-success" })
+        @Html.ActionLink("Back to List", "Index")
     }
     else
     {
         @Html.ActionLink("Make A Proposal", "Create", "ProposalRequest", new { area = "FreeLancer", id = Model.Id }, new { @class = "btn btn-success" })
-    }|
-    @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "Index")
+    }
+
 
 </div>

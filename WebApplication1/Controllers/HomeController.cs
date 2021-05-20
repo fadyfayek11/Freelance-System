@@ -8,21 +8,21 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    
+   
     public class HomeController : Controller
     {
+       
 
         private ApplicationDbContext _db;
+        
         public HomeController()
-        {
-            _db = new ApplicationDbContext();
+        {            
+           _db = new ApplicationDbContext();
+          
         }
+      
         public ActionResult Index()
         {
-            var userid = User.Identity.GetUserId();
-            ViewBag.ProposalRequest = _db.Proposals.Where(p => p.ClientId == userid && p.IsAccepted == null).Count();
-
-            ViewBag.CountRequest = _db.PostJobs.Where(p => p.IsStillAvilavble == false).Count();
             return View();
         }
         

@@ -81,7 +81,6 @@ namespace WebApplication1.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
-            ViewBag.CountRequest = _db.PostJobs.Where(p => p.IsStillAvilavble == false).Count();
 
             return View(model);
         }
@@ -151,7 +150,17 @@ namespace WebApplication1.Controllers
                     userFromDb.UserName = model.UserName;
                     userFromDb.Email = model.Email;
 
-                    //bool existUserName = await _db.Users.FirstOrDefaultAsync(u=>u.UserName == ) != null;
+                    var userPosts = from user in _db.PostJobs
+                                    where user.UserId == model.Id
+                                    select user;
+                    if (userPosts != null)
+                    {
+                        foreach (var item in userPosts)
+                        {
+                            item.UserName = model.UserName;
+                        }
+                    }
+                                   
                     await _db.SaveChangesAsync();
                     return RedirectToAction("Index");
 

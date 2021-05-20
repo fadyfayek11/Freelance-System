@@ -1,4 +1,7 @@
 ﻿@using WebApplication1.Utility
+@using WebApplication1.Models;
+@using Microsoft.AspNet.Identity;
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +15,7 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header" >
+            <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -20,33 +23,40 @@
                 </button>
                 @Html.ActionLink("المشغلاتي", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-
+            @{
+                ApplicationDbContext _db = new ApplicationDbContext();
+                var myId = User.Identity.GetUserId();
+                var CountRequest = _db.PostJobs.Where(p => p.IsStillAvilavble == false && p.IsNotificationOfPostsRequestSeen == null).Count();
+                var ProposalRequest = _db.Proposals.Where(p => p.ClientId == myId && p.IsAccepted == null && p.IsNotificationOfProposalRequestSeen == null).Count();
+            }
             <div class="navbar-collapse collapse">
                 @if (User.IsInRole(SD.AdminUser))
                 {
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Profile", "Index", "Manage", new { area = "" }, null)</li>
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Profile", "Index", "Manage", new { area = "" }, null)</li>
 
-                    <li>@Html.ActionLink("Users' page", "Index", "Users", new { area = "Admin" }, null)</li>
+                        <li>@Html.ActionLink("Users' page", "Index", "Users", new { area = "Admin" }, null)</li>
 
-                    <li>@Html.ActionLink("Posts page", "Index", "Posts", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Posts page", "Index", "Posts", new { area = "" }, null)</li>
 
-                    <li>
-                        @Html.ActionLink("Posts Requests", "Index", "PostRequest", new { area = "Admin" }, null)
-                        @if (ViewBag.CountRequest > 0)
-                        {
-                            <span class="badge badge-pill" style="float:right;margin-top:-40px;background-color:red;">@ViewBag.CountRequest</span>
-                        }
-                    </li>
-                    <li>
-                        @Html.ActionLink("Received Proposals", "Index", "AdminReceivedProposal", new { area = "Admin" }, null)
-                        @if (ViewBag.ProposalRequest > 0)
-                        {
-                            <span class="badge badge-pill" style="float:right;margin-top:-40px;background-color:red;">@ViewBag.ProposalRequest</span>
-                        }
-                    </li>
-                    <li>@Html.ActionLink("My Posts", "Index", "AdminPosts", new { area = "Admin" }, null)</li>
-                </ul>
+                        <li>
+                            @Html.ActionLink("Posts Requests", "Index", "PostRequest", new { area = "Admin" }, null)
+
+
+                            @if (CountRequest > 0)
+                            {
+                                <span class="badge badge-pill" style="float:right;margin-top:-40px;background-color:red;">@CountRequest</span>
+                            }
+                        </li>
+                        <li>
+                            @Html.ActionLink("Received Proposals", "Index", "AdminReceivedProposal", new { area = "Admin" }, null)
+                            @if (ProposalRequest > 0)
+                            {
+                                <span class="badge badge-pill" style="float:right;margin-top:-40px;background-color:red;">@ProposalRequest</span>
+                            }
+                        </li>
+                        <li>@Html.ActionLink("My Posts", "Index", "AdminPosts", new { area = "Admin" }, null)</li>
+                    </ul>
                     @Html.Partial("_LoginPartial")
                 }
                 else if (User.IsInRole(SD.ClientUser))
@@ -57,12 +67,12 @@
                         <li>@Html.ActionLink("Create New Post", "Create", "PostFromClient", new { area = "Client" }, null)</li>
                         <li>@Html.ActionLink("Wall", "Index", "Posts", new { area = "" }, null)</li>
                         <li>@Html.ActionLink("My Posts", "Index", "ClientPosts", new { area = "Client" }, null)</li>
-                        
+
                         <li>
                             @Html.ActionLink("Received Proposals", "Index", "ReceivdProposals", new { area = "Client" }, null)
-                            @if (ViewBag.ProposalRequest > 0)
+                            @if (ProposalRequest > 0)
                             {
-                                <span class="badge badge-pill" style="float:right;margin-top:-40px;background-color:red;">@ViewBag.ProposalRequest</span>
+                                <span class="badge badge-pill" style="float:right;margin-top:-40px;background-color:red;">@ProposalRequest</span>
                             }
                         </li>
                     </ul>
@@ -72,10 +82,10 @@
                 {
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Profile", "Index", "Manage", new { area = "" }, null)</li>
-                        <li>@Html.ActionLink("Wall", "Index", "Posts",new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Wall", "Index", "Posts", new { area = "" }, null)</li>
                         <li>@Html.ActionLink("My Proposals", "Index", "ProposalRequest", new { area = "FreeLancer" }, null)</li>
                         <li>
-                            @Html.ActionLink("Saved To Read Later", "Index", "MySavedPost", new { area = "FreeLancer"},null)
+                            @Html.ActionLink("Saved To Read Later", "Index", "MySavedPost", new { area = "FreeLancer" }, null)
                         </li>
                         <li>@Html.ActionLink("My Accepted Proposal", "Index", "AcceptedProposal", new { area = "FreeLancer" }, null)</li>
                     </ul>
@@ -83,9 +93,9 @@
                 }
                 else
                 {
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Wall", "Index", "Posts")</li>                
-            </ul>
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Wall", "Index", "Posts")</li>
+                    </ul>
                     @Html.Partial("_LoginPartial")
                 }
 

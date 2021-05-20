@@ -34,10 +34,15 @@ namespace WebApplication1.Areas.Client.Controllers
             };
         }
         // GET: Client/ReceivdProposals
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var myId = User.Identity.GetUserId();
-            ViewBag.ProposalRequest = _db.Proposals.Where(p => p.ClientId == myId && p.IsAccepted == null).Count();
+
+            foreach (var item in _db.Proposals.Where(p => p.IsNotificationOfProposalRequestSeen == null))
+            {
+                item.IsNotificationOfProposalRequestSeen = true;
+            }
+            await _db.SaveChangesAsync();
 
             ProVM.Proposals = _db.Proposals.Where(p => p.ClientId == myId && p.IsAccepted == null);
             var m = from p in _db.PostJobs

@@ -13,10 +13,7 @@
             <table class="table">
                 <tr>
                     <th>Job Type</th>
-                    <th>Job Budget</th>
-                    <th>Rate</th>
-                    <th>Number Of Submitted</th>
-                    <th>Owner</th>
+                    <th>Job Budget</th>                   
                 </tr>
 
                 @foreach (var post in Model.PostJob)
@@ -24,10 +21,7 @@
                     <tr>
 
                         <td>@post.JobType</td>
-                        <td>@post.JobBudget $</td>
-                        <td>@post.Rate</td>
-                        <td>@post.NumberOfSubmitted</td>
-                        <td>@post.UserName</td>
+                        <td>@post.JobBudget $</td>                       
                     </tr>
                 }
             </table>

@@ -45,6 +45,10 @@ namespace WebApplication1.Models
         public int Rate { get; set; }
 
         public bool IsAvilavbleAtWall { get; set; }
-       
+
+
+        public bool? IsNotificationOfPostsRequestSeen { get; set; } 
+
+
     }
 }

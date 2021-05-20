@@ -18,15 +18,19 @@ namespace WebApplication1.Areas.Admin.Controllers
         private readonly ApplicationDbContext _db;
         public PostRequestController()
         {
-            _db = new ApplicationDbContext();
+            _db = new ApplicationDbContext();            
+
+           
         }
         // GET: Admin/PostRequest
-        public  ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var myId = User.Identity.GetUserId();
-            ViewBag.ProposalRequest = _db.Proposals.Where(p => p.ClientId == myId && p.IsAccepted == null).Count();
 
-
+            foreach (var item in _db.PostJobs.Where(p => p.IsNotificationOfPostsRequestSeen == null))
+            {
+                item.IsNotificationOfPostsRequestSeen = true;                
+            }
+           await _db.SaveChangesAsync();
 
             return View(_db.PostJobs.Where(p=>p.IsStillAvilavble == false).ToList());
         }
@@ -55,27 +59,32 @@ namespace WebApplication1.Areas.Admin.Controllers
         public async Task<ActionResult> Edit(PostJob model)
         {    
             var post = await _db.PostJobs.FirstOrDefaultAsync(p=>p.Id==model.Id);
-            model.IsStillAvilavble = true;
-            model.IsAvilavbleAtWall = true;
+
+            DateTime date = DateTime.Now; 
           
             if (post == null)
             {
                 return HttpNotFound();
             }
 
-            if (ModelState.IsValid)
+            try
             {
-                post.IsStillAvilavble = model.IsStillAvilavble;
-                post.IsAvilavbleAtWall = model.IsAvilavbleAtWall;
+                post.IsStillAvilavble = true;
+                post.IsAvilavbleAtWall = true;
                 post.JobBudget = model.JobBudget;
                 post.JobType = model.JobType;
-                
-                post.UserName = model.UserName;                        
-                
+                post.CreationDate = date;
 
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
+
             }
+            catch (Exception)
+            {
+
+               
+            }
+               
             return View();
             
         }

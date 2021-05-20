@@ -35,11 +35,15 @@ namespace WebApplication1.Areas.Admin.Controllers
             };
         }
         // GET: Admin/AdminReceivedProposal
-        public ActionResult Index()
-        {
-            ViewBag.CountRequest = _db.PostJobs.Where(p => p.IsStillAvilavble == false).Count();
-
+        public async Task<ActionResult> Index()
+        {           
             var myId = User.Identity.GetUserId();
+            
+            foreach (var item in _db.Proposals.Where(p=>p.IsNotificationOfProposalRequestSeen == null))
+            {
+                item.IsNotificationOfProposalRequestSeen = true;
+            }
+            await _db.SaveChangesAsync();
 
             ProVM.Proposals = _db.Proposals.Where(p => p.ClientId == myId && p.IsAccepted == null);
             var m = from p in _db.PostJobs

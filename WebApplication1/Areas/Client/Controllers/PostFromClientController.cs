@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -30,13 +31,15 @@ namespace WebApplication1.Areas.Client.Controllers
         public async Task<ActionResult> Create(PostJob model)
         {
             var userid = User.Identity.GetUserId();
+            DateTime date = DateTime.Now;
             try
             {
                 model.IsStillAvilavble = false;
                 model.IsAvilavbleAtWall = true;
                 model.NumberOfSubmitted = 0;
                 model.Rate = 1;
-
+                model.CreationDate = date;
+                model.UserName = User.Identity.GetUserName();
                 model.UserId = userid;
                 _db.PostJobs.Add(model);
                 await _db.SaveChangesAsync();

@@ -180,12 +180,6 @@
     <Compile Include="Areas\FreeLancer\Controllers\ProposalRequestController.cs" />
     <Compile Include="Areas\FreeLancer\FreeLancerAreaRegistration.cs" />
     <Compile Include="Areas\FreeLancer\Controllers\MySavedPostController.cs" />
-    <Compile Include="BL\IPostJopRepository.cs" />
-    <Compile Include="BL\IProposalRepository.cs" />
-    <Compile Include="BL\ISavedRepository.cs" />
-    <Compile Include="BL\PostJopRepository.cs" />
-    <Compile Include="BL\ProposalRepository.cs" />
-    <Compile Include="BL\SavedRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />

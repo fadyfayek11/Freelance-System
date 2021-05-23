@@ -116,7 +116,18 @@ namespace WebApplication1.Controllers
                     {
                         if (upload != null)
                         {
-                           
+                            if (userFromDb.Photo == "profile.png")
+                            {
+
+                                string path = Server.MapPath("~/ProfilesImages/");
+
+                                string photoname = Guid.NewGuid() + Path.GetFileName(upload.FileName);
+                                string fullpath = Path.Combine(path, photoname);
+                                upload.SaveAs(fullpath);
+                                userFromDb.Photo = photoname;
+                            }
+                            else
+                            {
                                 string oldpath = Server.MapPath("~/ProfilesImages/") + userFromDb.Photo;
                                 if (System.IO.File.Exists(oldpath))
                                 {
@@ -130,6 +141,8 @@ namespace WebApplication1.Controllers
                                 string fullpath = Path.Combine(path, photoname);
                                 upload.SaveAs(fullpath);
                                 userFromDb.Photo = photoname;
+                            }
+                                
                             
                         }
                         else

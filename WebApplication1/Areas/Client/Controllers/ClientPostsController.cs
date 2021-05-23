@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication1.DAL;
 using WebApplication1.Models;
 using WebApplication1.Utility;
 
@@ -14,27 +15,28 @@ namespace WebApplication1.Areas.Client.Controllers
     [Authorize(Roles = SD.ClientUser)]
     public class ClientPostsController : Controller
     {
-        private readonly ApplicationDbContext _db;
+      
+        private readonly IPostJobRepository postJobRepository;
         public ClientPostsController()
         {
-            _db = new ApplicationDbContext();
+            postJobRepository = new PostJobRepository(new ApplicationDbContext());          
         }
 
         // GET: Client/ClientPosts
         public ActionResult Index()
         {
-            var userid = User.Identity.GetUserId();           
-            return View(_db.PostJobs.Where(p=>p.UserId == userid));
+            var userid = User.Identity.GetUserId();            
+            return View(postJobRepository.GetAllPostsOfUser(userid));
         }
 
         // GET: Client/ClientPosts/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return HttpNotFound();
-            }
-            var post = await _db.PostJobs.FirstOrDefaultAsync(p => p.Id == id);
+            }           
+            var post =  postJobRepository.GetPostJobById(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -45,9 +47,9 @@ namespace WebApplication1.Areas.Client.Controllers
         // POST: Client/ClientPosts/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(PostJob model)
+        public ActionResult Edit(PostJob model)
         {
-            var post = await _db.PostJobs.FirstOrDefaultAsync(p => p.Id == model.Id);
+            var post = postJobRepository.GetPostJobById(model.Id);
             DateTime date = DateTime.Now;
 
             if (post == null)
@@ -61,7 +63,8 @@ namespace WebApplication1.Areas.Client.Controllers
                 post.JobType = model.JobType;
                 post.CreationDate = date;
 
-                await _db.SaveChangesAsync();
+                postJobRepository.EditPost(post);
+                postJobRepository.Save();
                 return RedirectToAction("Index");
             }
             catch (Exception)
@@ -74,13 +77,13 @@ namespace WebApplication1.Areas.Client.Controllers
         }
 
         // GET: Client/ClientPosts/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return HttpNotFound();
             }
-            var post = await _db.PostJobs.FirstOrDefaultAsync(p => p.Id == id);
+            var post = postJobRepository.GetPostJobById(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -90,18 +93,18 @@ namespace WebApplication1.Areas.Client.Controllers
         // POST: Client/ClientPosts/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(int id)
+        public ActionResult Delete(int id)
         {
 
-            var post = await _db.PostJobs.FirstOrDefaultAsync(p => p.Id == id);
+            var post = postJobRepository.GetPostJobById(id);
             if (post == null)
             {
                 return HttpNotFound();
             }
             if (ModelState.IsValid)
             {
-                _db.PostJobs.Remove(post);
-                await _db.SaveChangesAsync();
+                postJobRepository.DeltePost(post);
+                postJobRepository.Save();
                 return RedirectToAction("Index");
             }
 

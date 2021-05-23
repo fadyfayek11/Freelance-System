@@ -180,10 +180,14 @@
     <Compile Include="Areas\FreeLancer\Controllers\ProposalRequestController.cs" />
     <Compile Include="Areas\FreeLancer\FreeLancerAreaRegistration.cs" />
     <Compile Include="Areas\FreeLancer\Controllers\MySavedPostController.cs" />
+    <Compile Include="DAL\IPostJobRepository.cs" />
+    <Compile Include="DAL\ISavedPostsRepository.cs" />
+    <Compile Include="DAL\PostJobRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="DAL\SavedPostsRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -18,9 +18,7 @@ namespace WebApplication1.Areas.Admin.Controllers
         private readonly ApplicationDbContext _db;
         public PostRequestController()
         {
-            _db = new ApplicationDbContext();            
-
-           
+            _db = new ApplicationDbContext();     
         }
         // GET: Admin/PostRequest
         public async Task<ActionResult> Index()

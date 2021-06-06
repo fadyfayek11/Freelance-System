@@ -33,15 +33,24 @@ namespace WebApplication1.Controllers
             {
                 if (option == "Jop Type")
                 {
-                    return View(_db.PostJobs.Where(p => p.JobType.Contains(search) && p.IsAvilavbleAtWall == true || search == null).ToList());
+                    try
+                    {
+                        return View(_db.PostJobs.Where(p => p.JobType.Contains(search) && p.IsAvilavbleAtWall == true || search == null).ToList());
+                    }
+                    catch (Exception)
+                    {
+
+
+                    }
+                    return View(_db.PostJobs.Where(p => p.IsAvilavbleAtWall == true));
                 }
                 else if (option == "Date")
                 {
                     try
                     {
                         DateTime SearchDate = Convert.ToDateTime(search);
+                        
                         return View(_db.PostJobs.Where(p => p.CreationDate == SearchDate && p.IsAvilavbleAtWall == true || search == null).ToList());
-
                     }
                     catch (Exception)
                     {
@@ -52,7 +61,16 @@ namespace WebApplication1.Controllers
                 }
                 else 
                 {
-                    return View(_db.PostJobs.Where(p => p.UserName.Contains(search) && p.IsAvilavbleAtWall == true || search == null).ToList());
+                    try
+                    {
+                        return View(_db.PostJobs.Where(p => p.UserName.Contains(search) && p.IsAvilavbleAtWall == true || search == null).ToList());
+                    }
+                    catch (Exception)
+                    {
+
+                       
+                    }
+                    return View(_db.PostJobs.Where(p => p.IsAvilavbleAtWall == true));
                 }
             }
             else
@@ -171,7 +189,8 @@ namespace WebApplication1.Controllers
                 return HttpNotFound();
             }
             return View(post);
-        }
+        }     
+       
 
     }
 }

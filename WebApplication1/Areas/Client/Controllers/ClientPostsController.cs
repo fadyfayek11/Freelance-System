@@ -17,9 +17,11 @@ namespace WebApplication1.Areas.Client.Controllers
     {
       
         private readonly IPostJobRepository postJobRepository;
+        private readonly ISavedPostsRepository savedPostsRepository;
         public ClientPostsController()
         {
-            postJobRepository = new PostJobRepository(new ApplicationDbContext());          
+            postJobRepository = new PostJobRepository(new ApplicationDbContext());
+            savedPostsRepository = new SavedPostsRepository(new ApplicationDbContext());
         }
 
         // GET: Client/ClientPosts
@@ -97,6 +99,7 @@ namespace WebApplication1.Areas.Client.Controllers
         {
 
             var post = postJobRepository.GetPostJobById(id);
+            var SavedPost = savedPostsRepository.GetSavedsById(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -104,7 +107,12 @@ namespace WebApplication1.Areas.Client.Controllers
             if (ModelState.IsValid)
             {
                 postJobRepository.DeltePost(post);
+                if (SavedPost != null)
+                {
+                    savedPostsRepository.DeleteSavedPost(SavedPost);
+                }
                 postJobRepository.Save();
+                savedPostsRepository.SaveChange();
                 return RedirectToAction("Index");
             }
 

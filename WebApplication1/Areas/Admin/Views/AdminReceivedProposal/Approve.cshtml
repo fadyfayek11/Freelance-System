@@ -19,16 +19,23 @@
                 <tr>
                     <th>The Proposal</th>
                 </tr>
-
-                @foreach (var proposal in Model.ProposalData)
+                @try
                 {
-                    <tr>
+                    foreach (var proposal in Model.ProposalData)
+                    {
+                        <tr>
 
-                        <td>@proposal.TheProposal</td>
+                            <td>@proposal.TheProposal</td>
 
-                    </tr>
+                        </tr>
+
+                    }
+                }
+                catch (Exception)
+                {
 
                 }
+
             </table>
         </div>
         <div class="col-lg-6">
@@ -38,21 +45,28 @@
                     <th>FreeLancer Phone</th>
                     <th>FreeLancer Photo</th>
                 </tr>
-
-                @foreach (var userData in Model.UserData)
+                @try
                 {
-                    <tr>
+                    foreach (var userData in Model.UserData)
+                    {
+                        <tr>
 
-                        <td>@userData.UserName</td>
-                        <td>@userData.PhoneNumber</td>
-                        <td>
-                            @{
-                                string path = userData.Photo == null ? "profile.png" : userData.Photo;
+                            <td>@userData.UserName</td>
+                            <td>@userData.PhoneNumber</td>
+                            <td>
+                                @{
+                                    string path = userData.Photo == null ? "profile.png" : userData.Photo;
 
-                            }
-                            <img src="~/ProfilesImages/@path" alt="Profile" width="50" height="50" style="border-radius:50%" />
-                        </td>
-                    </tr>
+                                }
+                                <img src="~/ProfilesImages/@path" alt="Profile" width="50" height="50" style="border-radius:50%" />
+                            </td>
+                        </tr>
+                    }
+                }
+                catch (Exception)
+                {
+
+
                 }
 
             </table>

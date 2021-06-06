@@ -175,11 +175,6 @@ namespace WebApplication1.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     if (role == SD.FreelancerUser)
                     {
                         await UserManager.AddToRoleAsync(user.Id, SD.FreelancerUser);
@@ -190,16 +185,16 @@ namespace WebApplication1.Controllers
                       await UserManager.AddToRoleAsync(user.Id, SD.ClientUser);                      
                        
                     }
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login", "Account");
                 }
                 AddErrors(result);
             }
             
-            // If we got this far, something failed, redisplay form
+           
             return View(model);
         }
 
-        //
+        
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)

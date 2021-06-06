@@ -20,11 +20,11 @@
     <br />
     if (Model.Count() == 0)
     { <tr>
-            <td><h2>Sorry We don't got it</h2></td>
+            <td><h2>Sorry We don't got it yet</h2></td>
         </tr>
     }
     else
-    {      
+    {
         <table class="table">
             <tr>
 
@@ -97,13 +97,24 @@
                                 </a>
                             </td>
                         }
-                        else
+                        else if (User.IsInRole(SD.ClientUser))
                         {
                             <td>
                                 <a href="@Url.Action("Details", "Posts", new { id = item.Id })" class="btn btn-primary form-control" style="width:100px">
                                     More Details
                                 </a>
                             </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <a href="@Url.Action("Details", "Posts", new { id = item.Id })" class="btn btn-primary form-control" style="width:100px">
+                                    More Details
+                                </a>
+                                @Html.ActionLink("Rate", "RateJob", "Rate", new { area = "FreeLancer", id = item.Id }, new { @class = "btn btn-success" })
+
+                            </td>
+                           
                         }
                     }
                 </tr>

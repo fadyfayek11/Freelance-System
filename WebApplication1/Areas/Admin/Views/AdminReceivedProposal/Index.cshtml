@@ -13,7 +13,7 @@
             <table class="table">
                 <tr>
                     <th>Job Type</th>
-                    <th>Job Budget</th>                   
+                    <th>Job Budget</th>
                 </tr>
 
                 @foreach (var post in Model.PostJob)
@@ -21,7 +21,7 @@
                     <tr>
 
                         <td>@post.JobType</td>
-                        <td>@post.JobBudget $</td>                       
+                        <td>@post.JobBudget $</td>
                     </tr>
                 }
             </table>
@@ -47,8 +47,10 @@
                                 @Html.ActionLink("Reject", "Reject", new { id = proposal.IdOfProposal })
                             </td>
                         }
+
                     </tr>
                 }
+
 
             </table>
         </div>

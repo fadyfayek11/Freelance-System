@@ -138,7 +138,7 @@ namespace WebApplication1.Areas.Admin.Controllers
                 ViewBag.ErrorMessage = "No user";
                 return HttpNotFound();
             }
-            if (user.Photo != null)
+            if (user.Photo != null && user.Photo!= "profile.png")
             {
                 string path = Server.MapPath("~/ProfilesImages/") + user.Photo;
                 if (System.IO.File.Exists(path))
@@ -146,11 +146,16 @@ namespace WebApplication1.Areas.Admin.Controllers
                     System.IO.File.Delete(path);
                 }
             }
-            
 
-             _db.Users.Remove(user);
-            await _db.SaveChangesAsync();            
+            var Userposts = _db.PostJobs.Where(p => p.UserId == user.Id);
+
+            _db.PostJobs.RemoveRange(Userposts);
+            await _db.SaveChangesAsync();
+
+            _db.Users.Remove(user);
+            await _db.SaveChangesAsync();
+
             return RedirectToAction("Index");
-        }
+        }       
     }
 }

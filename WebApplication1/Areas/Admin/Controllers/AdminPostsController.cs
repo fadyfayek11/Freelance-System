@@ -117,7 +117,8 @@ namespace WebApplication1.Areas.Admin.Controllers
 
         }
 
-        // GET: 
+
+       // GET: 
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -149,7 +150,7 @@ namespace WebApplication1.Areas.Admin.Controllers
                 postJobRepository.DeltePost(post);
                 if (SavedPost != null)
                 {
-                   savedPostsRepository.DeleteSavedPost(SavedPost);
+                    savedPostsRepository.DeleteSavedPost(SavedPost);
                 }
 
                 postJobRepository.Save();

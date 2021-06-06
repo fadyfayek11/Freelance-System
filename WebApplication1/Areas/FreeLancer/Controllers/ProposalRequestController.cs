@@ -31,7 +31,7 @@ namespace WebApplication1.Areas.FreeLancer.Controllers
         {            
             var userID = User.Identity.GetUserId();
 
-            ProVM.Proposals = _db.Proposals.Where(p => p.FreeLancerId == userID);
+            ProVM.Proposals = _db.Proposals.Where(p => p.FreeLancerId == userID && p.IsAccepted == null);
             var m = from p in _db.PostJobs
                     join u in ProVM.Proposals
                     on p.Id equals u.PostId

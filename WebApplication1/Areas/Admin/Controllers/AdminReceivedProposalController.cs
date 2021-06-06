@@ -61,7 +61,7 @@ namespace WebApplication1.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            PropAndUserVM.ProposalData = _db.Proposals.Where(p => p.IdOfProposal == id);
+            PropAndUserVM.ProposalData = _db.Proposals.Where(p => p.IdOfProposal == id && p.IsAccepted == null);
             var m = from p in _db.Users
                     join u in PropAndUserVM.ProposalData
                     on p.Id equals u.FreeLancerId
@@ -81,24 +81,24 @@ namespace WebApplication1.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            proposalDb.IsAccepted = true;
 
-            try
+            var postid = proposalDb.PostId;
+            await _db.SaveChangesAsync();
+
+            var AllProposelWithTheId = await _db.Proposals.FirstOrDefaultAsync(p => p.PostId == postid && p.IsAccepted == null);
+            var PostOfTheID = await _db.PostJobs.FirstOrDefaultAsync(p => p.Id == postid);
+            PostOfTheID.IsAvilavbleAtWall = false;
+
+            await _db.SaveChangesAsync();
+            if (AllProposelWithTheId != null)
             {
-                proposalDb.IsAccepted = true;
-
-                var postid = proposalDb.PostId;
-                var AllProposelWithTheId = await _db.Proposals.FirstOrDefaultAsync(p => p.PostId == postid && p.IsAccepted == null);
-                var PostOfTheID = await _db.PostJobs.FirstOrDefaultAsync(p => p.Id == postid);
-                PostOfTheID.IsAvilavbleAtWall = false;
                 _db.Proposals.Remove(AllProposelWithTheId);
-
                 await _db.SaveChangesAsync();
-                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction("Index");
+
         }
 
         public async Task<ActionResult> Reject(int? id)

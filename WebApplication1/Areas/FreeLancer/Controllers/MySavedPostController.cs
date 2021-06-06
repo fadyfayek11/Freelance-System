@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -27,14 +28,30 @@ namespace WebApplication1.Areas.FreeLancer.Controllers
         // GET: FreeLancer/MySavedPost
         public ActionResult Index()
         {
-            var mySaveds = from p in _db.PostJobs
-                           join u in _db.Saveds
-                           on p.Id equals u.IdOfThePost
-                           select p;
-            return View(mySaveds);
+            var userID = User.Identity.GetUserId();          
+
+            var mySaveds = from s in _db.Saveds
+                           where s.IdOfTheUser == userID
+                           select s;
+
+            var Posts = from p in _db.PostJobs
+                        join u in mySaveds
+                        on p.Id equals u.IdOfThePost
+                        select p;
+
+            return View(Posts.Where(p=>p.IsAvilavbleAtWall == true));
         }
 
 
+        public ActionResult Saveds()
+        {
+            string userID = User.Identity.GetUserId();
+            var mySaveds = from s in _db.Saveds
+                           where s.IdOfTheUser == userID
+                           select s;
+            return View(mySaveds);
+
+        }
 
         // GET: FreeLancer/MySavedPost/Add
         public ActionResult Add(int? id)
@@ -57,6 +74,7 @@ namespace WebApplication1.Areas.FreeLancer.Controllers
         public async Task<ActionResult> Add(int id)
         {
             var postFromDb = postJobRepository.GetPostJobById(id);
+            var userID = User.Identity.GetUserId();
             Saved SavePost = new Saved();
             if (postFromDb == null)
             {
@@ -66,8 +84,8 @@ namespace WebApplication1.Areas.FreeLancer.Controllers
             {
                 SavePost.IdOfThePost = id;
                 SavePost.IsMarked = true;
-                SavePost.IdOfTheUser = postFromDb.UserId;
-                bool exist = await savedPostsRepository.CkeckIfthePostSavedBeforeAsync(id,postFromDb.UserId);
+                SavePost.IdOfTheUser = userID;
+                bool exist = await savedPostsRepository.CkeckIfthePostSavedBeforeAsync(id, userID);
                 if (exist)
                 {
                     ViewBag.ExistSavedPost = "You have already added it";

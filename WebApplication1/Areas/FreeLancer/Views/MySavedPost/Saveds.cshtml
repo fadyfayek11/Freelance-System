@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebApplication1.Models.Saved>
+
+@{
+    ViewBag.Title = "Saveds";
+}
+
+<h2>Saveds</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IsMarked)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdOfTheUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdOfThePost)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsMarked)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdOfTheUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdOfThePost)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdOfSavedPost }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdOfSavedPost }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdOfSavedPost })
+        </td>
+    </tr>
+}
+
+</table>

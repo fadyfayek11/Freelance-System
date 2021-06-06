@@ -178,6 +178,7 @@
     <Compile Include="Areas\Client\Controllers\ReceivdProposalsController.cs" />
     <Compile Include="Areas\FreeLancer\Controllers\AcceptedProposalController.cs" />
     <Compile Include="Areas\FreeLancer\Controllers\ProposalRequestController.cs" />
+    <Compile Include="Areas\FreeLancer\Controllers\RateController.cs" />
     <Compile Include="Areas\FreeLancer\FreeLancerAreaRegistration.cs" />
     <Compile Include="Areas\FreeLancer\Controllers\MySavedPostController.cs" />
     <Compile Include="DAL\IPostJobRepository.cs" />
@@ -367,6 +368,7 @@
     <Content Include="Areas\Admin\Views\AdminReceivedProposal\Reject.cshtml" />
     <Content Include="Areas\Client\Views\ReceivdProposals\Reject.cshtml" />
     <Content Include="Areas\Admin\Views\AdminPosts\Create.cshtml" />
+    <Content Include="Areas\FreeLancer\Views\MySavedPost\Saveds.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -418,14 +420,11 @@
     <Content Include="Views\Posts\Details.cshtml" />
     <Content Include="Views\Posts\Edit.cshtml" />
     <Content Include="Views\Posts\Delete.cshtml" />
+    <Content Include="Areas\FreeLancer\Views\Rate\RateJob.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Areas\Client\Data\" />
     <Folder Include="Areas\Client\Views\Shared\" />
-    <Folder Include="Areas\FreeLancer\Data\" />
     <Folder Include="Areas\FreeLancer\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

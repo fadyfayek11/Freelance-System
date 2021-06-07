@@ -9,12 +9,13 @@
 {
     <br />
     @Html.TextBox("search", null, new { @class = "form-control" })
-    @Html.RadioButton("option", "Jop Type") <text>Jop Type</text>
-    @Html.RadioButton("option", "Date") <text>Date</text>
+    <input type="submit" name="submit" value="Search" class="btn btn-primary" style="display: flex;margin-top: 5px;">
+    @Html.RadioButton("option", "Jop Type")<text>Jop Type</text>
+    @Html.RadioButton("option", "Date")<text >Date</text>
     @Html.RadioButton("option", "Client Name")<text>Client Name</text>
-    <input type="submit"
-           name="submit"
-           value="Search" />
+
+
+
     <br />
     <br />
     <br />
@@ -83,16 +84,66 @@
                             @Html.DisplayFor(modelItem => item.NumberOfSubmitted)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Rate)
+                            @if (item.Rate == 5)
+                            {
+                                <div class="stars">
+                                    <span class="fa fa-star checked" id="sp1"></span>
+                                    <span class="fa fa-star checked" id="sp2"></span>
+                                    <span class="fa fa-star checked" id="sp3"></span>
+                                    <span class="fa fa-star checked" id="sp4"></span>
+                                    <span class="fa fa-star checked" id="sp5"></span>
+                                </div>
+                            }
+                            else if (item.Rate == 4)
+                            {
+                                <div class="stars">
+                                    <span class="fa fa-star checked" id="sp1"></span>
+                                    <span class="fa fa-star checked" id="sp2"></span>
+                                    <span class="fa fa-star checked" id="sp3"></span>
+                                    <span class="fa fa-star checked" id="sp4"></span>
+                                    <span class="fa fa-star" id="sp5"></span>
+                                </div>
+                            }
+                            else if (item.Rate == 3)
+                            {
+                                <div class="stars">
+                                    <span class="fa fa-star checked" id="sp1"></span>
+                                    <span class="fa fa-star checked" id="sp2"></span>
+                                    <span class="fa fa-star checked" id="sp3"></span>
+                                    <span class="fa fa-star" id="sp4"></span>
+                                    <span class="fa fa-star" id="sp5"></span>
+                                </div>
+                            }
+                            else if (item.Rate == 2)
+                            {
+                                <div class="stars">
+                                    <span class="fa fa-star checked" id="sp1"></span>
+                                    <span class="fa fa-star checked" id="sp2"></span>
+                                    <span class="fa fa-star" id="sp3"></span>
+                                    <span class="fa fa-star" id="sp4"></span>
+                                    <span class="fa fa-star" id="sp5"></span>
+                                </div>
+                            }
+                            else if (item.Rate == 1)
+                            {
+                                <div class="stars">
+                                    <span class="fa fa-star checked" id="sp1"></span>
+                                    <span class="fa fa-star" id="sp2"></span>
+                                    <span class="fa fa-star" id="sp3"></span>
+                                    <span class="fa fa-star" id="sp4"></span>
+                                    <span class="fa fa-star" id="sp5"></span>
+                                </div>
+                            }
+
                         </td>
 
                         if (User.IsInRole(SD.AdminUser))
                         {
                             <td>
-                                <a href="@Url.Action("Edit", "Posts", new { id = item.Id })" class="btn btn-primary form-control" style="width:100px">
+                                <a href="@Url.Action("Edit", "Posts", new { id = item.Id })" class="btn btn-primary form-control" style="width:70px">
                                     Edit
-                                </a> |
-                                <a href="@Url.Action("Delete", "Posts", new { id = item.Id })" class="btn btn-danger form-control" style="width:100px">
+                                </a>
+                                <a href="@Url.Action("Delete", "Posts", new { id = item.Id })" class="btn btn-danger form-control" style="width:70px">
                                     Delete
                                 </a>
                             </td>
@@ -114,7 +165,7 @@
                                 @Html.ActionLink("Rate", "RateJob", "Rate", new { area = "FreeLancer", id = item.Id }, new { @class = "btn btn-success" })
 
                             </td>
-                           
+
                         }
                     }
                 </tr>
@@ -122,4 +173,8 @@
 
         </table>
     }
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
 }

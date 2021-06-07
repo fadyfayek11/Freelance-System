@@ -57,13 +57,62 @@
                     @Html.DisplayFor(modelItem => item.NumberOfSubmitted)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Rate)
+                    @if (item.Rate == 5)
+                    {
+                        <div class="stars">
+                            <span class="fa fa-star checked" id="sp1"></span>
+                            <span class="fa fa-star checked" id="sp2"></span>
+                            <span class="fa fa-star checked" id="sp3"></span>
+                            <span class="fa fa-star checked" id="sp4"></span>
+                            <span class="fa fa-star checked" id="sp5"></span>
+                        </div>
+                    }
+                    else if (item.Rate == 4)
+                    {
+                        <div class="stars">
+                            <span class="fa fa-star checked" id="sp1"></span>
+                            <span class="fa fa-star checked" id="sp2"></span>
+                            <span class="fa fa-star checked" id="sp3"></span>
+                            <span class="fa fa-star checked" id="sp4"></span>
+                            <span class="fa fa-star" id="sp5"></span>
+                        </div>
+                    }
+                    else if (item.Rate == 3)
+                    {
+                        <div class="stars">
+                            <span class="fa fa-star checked" id="sp1"></span>
+                            <span class="fa fa-star checked" id="sp2"></span>
+                            <span class="fa fa-star checked" id="sp3"></span>
+                            <span class="fa fa-star" id="sp4"></span>
+                            <span class="fa fa-star" id="sp5"></span>
+                        </div>
+                    }
+                    else if (item.Rate == 2)
+                    {
+                        <div class="stars">
+                            <span class="fa fa-star checked" id="sp1"></span>
+                            <span class="fa fa-star checked" id="sp2"></span>
+                            <span class="fa fa-star" id="sp3"></span>
+                            <span class="fa fa-star" id="sp4"></span>
+                            <span class="fa fa-star" id="sp5"></span>
+                        </div>
+                    }
+                    else if (item.Rate == 1)
+                    {
+                        <div class="stars">
+                            <span class="fa fa-star checked" id="sp1"></span>
+                            <span class="fa fa-star" id="sp2"></span>
+                            <span class="fa fa-star" id="sp3"></span>
+                            <span class="fa fa-star" id="sp4"></span>
+                            <span class="fa fa-star" id="sp5"></span>
+                        </div>
+                    }                  
                 </td>
                 <td>
                     @Html.DisplayName("Pending")
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
 
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
                 </td>
@@ -87,13 +136,62 @@
                     @Html.DisplayFor(modelItem => item.NumberOfSubmitted)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Rate)
+                    @if (item.Rate == 5)
+                    {
+                        <div class="stars">
+                            <span class="fa fa-star checked" id="sp1"></span>
+                            <span class="fa fa-star checked" id="sp2"></span>
+                            <span class="fa fa-star checked" id="sp3"></span>
+                            <span class="fa fa-star checked" id="sp4"></span>
+                            <span class="fa fa-star checked" id="sp5"></span>
+                        </div>
+                    }
+                    else if (item.Rate == 4)
+                    {
+                        <div class="stars">
+                            <span class="fa fa-star checked" id="sp1"></span>
+                            <span class="fa fa-star checked" id="sp2"></span>
+                            <span class="fa fa-star checked" id="sp3"></span>
+                            <span class="fa fa-star checked" id="sp4"></span>
+                            <span class="fa fa-star" id="sp5"></span>
+                        </div>
+                    }
+                    else if (item.Rate == 3)
+                    {
+                        <div class="stars">
+                            <span class="fa fa-star checked" id="sp1"></span>
+                            <span class="fa fa-star checked" id="sp2"></span>
+                            <span class="fa fa-star checked" id="sp3"></span>
+                            <span class="fa fa-star" id="sp4"></span>
+                            <span class="fa fa-star" id="sp5"></span>
+                        </div>
+                    }
+                    else if (item.Rate == 2)
+                    {
+                        <div class="stars">
+                            <span class="fa fa-star checked" id="sp1"></span>
+                            <span class="fa fa-star checked" id="sp2"></span>
+                            <span class="fa fa-star" id="sp3"></span>
+                            <span class="fa fa-star" id="sp4"></span>
+                            <span class="fa fa-star" id="sp5"></span>
+                        </div>
+                    }
+                    else if (item.Rate == 1)
+                    {
+                        <div class="stars">
+                            <span class="fa fa-star checked" id="sp1"></span>
+                            <span class="fa fa-star" id="sp2"></span>
+                            <span class="fa fa-star" id="sp3"></span>
+                            <span class="fa fa-star" id="sp4"></span>
+                            <span class="fa fa-star" id="sp5"></span>
+                        </div>
+                    }                  
                 </td>
                 <td>
                     @Html.DisplayName("At Wall")
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
 
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
                 </td>
@@ -117,13 +215,62 @@
                     @Html.DisplayFor(modelItem => item.NumberOfSubmitted)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Rate)
+                    @if (item.Rate == 5)
+                    {
+                        <div class="stars">
+                            <span class="fa fa-star checked" id="sp1"></span>
+                            <span class="fa fa-star checked" id="sp2"></span>
+                            <span class="fa fa-star checked" id="sp3"></span>
+                            <span class="fa fa-star checked" id="sp4"></span>
+                            <span class="fa fa-star checked" id="sp5"></span>
+                        </div>
+                    }
+                    else if (item.Rate == 4)
+                    {
+                        <div class="stars">
+                            <span class="fa fa-star checked" id="sp1"></span>
+                            <span class="fa fa-star checked" id="sp2"></span>
+                            <span class="fa fa-star checked" id="sp3"></span>
+                            <span class="fa fa-star checked" id="sp4"></span>
+                            <span class="fa fa-star" id="sp5"></span>
+                        </div>
+                    }
+                    else if (item.Rate == 3)
+                    {
+                        <div class="stars">
+                            <span class="fa fa-star checked" id="sp1"></span>
+                            <span class="fa fa-star checked" id="sp2"></span>
+                            <span class="fa fa-star checked" id="sp3"></span>
+                            <span class="fa fa-star" id="sp4"></span>
+                            <span class="fa fa-star" id="sp5"></span>
+                        </div>
+                    }
+                    else if (item.Rate == 2)
+                    {
+                        <div class="stars">
+                            <span class="fa fa-star checked" id="sp1"></span>
+                            <span class="fa fa-star checked" id="sp2"></span>
+                            <span class="fa fa-star" id="sp3"></span>
+                            <span class="fa fa-star" id="sp4"></span>
+                            <span class="fa fa-star" id="sp5"></span>
+                        </div>
+                    }
+                    else if (item.Rate == 1)
+                    {
+                        <div class="stars">
+                            <span class="fa fa-star checked" id="sp1"></span>
+                            <span class="fa fa-star" id="sp2"></span>
+                            <span class="fa fa-star" id="sp3"></span>
+                            <span class="fa fa-star" id="sp4"></span>
+                            <span class="fa fa-star" id="sp5"></span>
+                        </div>
+                    }                   
                 </td>
                 <td>
                     @Html.DisplayName("Done")
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
 
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
                 </td>

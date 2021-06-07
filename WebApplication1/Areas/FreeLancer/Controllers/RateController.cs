@@ -23,13 +23,21 @@ namespace WebApplication1.Areas.FreeLancer.Controllers
             _db = new ApplicationDbContext();
         }
        
-        public ActionResult RateJob(int? id)
+        public async Task<ActionResult> RateJob(int? id)
         {
+
             if (id == null)
             {
                 return HttpNotFound();
             }
             var post = postJobRepository.GetPostJobById(id);
+            var userID = User.Identity.GetUserId();
+            var IsRatingBefore = await _db.Stars.FirstOrDefaultAsync(r => r.PostId == post.Id && r.UserId == userID);
+            if (IsRatingBefore != null)
+            {
+                ViewBag.MyRate = IsRatingBefore.Rating;
+            }
+         
             if (post == null)
             {
                 return HttpNotFound();
@@ -50,10 +58,10 @@ namespace WebApplication1.Areas.FreeLancer.Controllers
             StarRating rating = new StarRating();
             PostJob postfromDb = new PostJob();
 
-            var IsRatingBefore = await _db.Stars.FirstOrDefaultAsync(r => r.PostId == model.Id && r.UserId == userID);
+            var IsRatingBefore = await _db.Stars.FirstOrDefaultAsync(r => r.PostId == model.Id && r.UserId == userID);          
             if (IsRatingBefore != null)
             {
-                ViewBag.AlreadyRatedMessage= "You have already Rate this job";
+                ViewBag.AlreadyRatedMessage= "You have already Rate this job";               
             }
             else
             {
@@ -71,7 +79,7 @@ namespace WebApplication1.Areas.FreeLancer.Controllers
                 _db.Entry(postfromDb).State = EntityState.Modified;
                 await _db.SaveChangesAsync();
 
-                return View(post);
+                return RedirectToAction("Index","Posts",new { area = ""});
             }          
            
             return View(post);

@@ -42,9 +42,13 @@ namespace WebApplication1.Areas.FreeLancer.Controllers
 
         
 
-        // GET: FreeLancer/ProposalRequest/Create
-        public ActionResult Create()
+        // GET: FreeLancer/ProposalRequest/Create/post Id
+        public ActionResult Create(int? id)
         {
+            if(id == null)
+            {
+                return HttpNotFound();
+            }
             return View();
         }
 

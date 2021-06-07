@@ -50,7 +50,8 @@ namespace WebApplication1.Controllers
                     {
                         DateTime SearchDate = Convert.ToDateTime(search);
                         
-                        return View(_db.PostJobs.Where(p => p.CreationDate == SearchDate && p.IsAvilavbleAtWall == true || search == null).ToList());
+
+                        return View(_db.PostJobs.Where(p => p.CreationDate.ToString().Contains(search)&& p.IsAvilavbleAtWall == true || search == null).ToList());
                     }
                     catch (Exception)
                     {

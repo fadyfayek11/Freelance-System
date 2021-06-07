@@ -10,6 +10,8 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/4a8137dc1d.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -21,7 +23,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("المشغلاتي", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("The Crakers", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             @{
                 ApplicationDbContext _db = new ApplicationDbContext();

@@ -60,12 +60,17 @@
         </dd>
 
         <dt>
-            
+
             @Html.DisplayNameFor(model => model.Rate)
-           
+
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Rate)
+            <span class="fa fa-star checked" id="sp1"></span>
+            <span class="fa fa-star ch" id="sp2"></span>
+            <span class="fa fa-star" id="sp3"></span>
+            <span class="fa fa-star" id="sp4"></span>
+            <span class="fa fa-star" id="sp5"></span>
+            @Html.TextBoxFor(model => model.Rate, new{id = "MyRate", @class = "hidden"})           
         </dd>
 
     </dl>
@@ -92,4 +97,22 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            var rate = $("#MyRate").val();
+            if (rate == 5) {
+                $("#sp1,#sp2,#sp3,#sp4,#sp5").addClass("checked");
+            } else if (rate == 4) {
+                $("#sp1,#sp2,#sp3,#sp4").addClass("checked");
+            } else if (rate == 3) {
+                $("#sp1,#sp2,#sp3").addClass("checked");
+            } else if (rate == 2) {
+                $("#sp1,#sp2").addClass("checked");
+            } else if (rate == 1) {
+                $("#sp2,#sp3,#sp4,#sp5").removeClass("checked");
+            }
+
+
+        });
+    </script>
 }

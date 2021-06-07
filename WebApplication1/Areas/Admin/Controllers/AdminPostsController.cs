@@ -87,7 +87,7 @@ namespace WebApplication1.Areas.Admin.Controllers
         {
             var post = postJobRepository.GetPostJobById(model.Id);
 
-            DateTime date = DateTime.Now;
+            string date = DateTime.Now.ToString("dd/MM/yyyy");
 
             if (post == null)
             {
@@ -100,7 +100,7 @@ namespace WebApplication1.Areas.Admin.Controllers
                 post.IsAvilavbleAtWall = true;
                 post.JobBudget = model.JobBudget;
                 post.JobType = model.JobType;
-                post.CreationDate = date;
+                post.CreationDate = Convert.ToDateTime(date);
 
                 postJobRepository.EditPost(post);
                 postJobRepository.Save();
